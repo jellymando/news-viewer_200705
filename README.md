@@ -2,11 +2,11 @@
 
 newsapi에서 제공하는 API를 사용하여 최신 뉴스를 불러온 후 보여주기
 
-    ### npm add axios
+    npm add axios
 
 자바스크립트 HTTP 클라이언트.<br>
 HTTP 요청을 Promise 기반으로 처리.<br><br>
-'''
+```
 const App = () => {
   const [data, setData] = useState(null);
   const onClick = () => {
@@ -15,10 +15,10 @@ const App = () => {
     }
   });
 };
-'''
+```
 <br><br>
 <b>async 적용</b><br>
-'''
+```
 const App = () => {
   const [data, setData] = useState(null);
   const onClick = async() => {
@@ -30,4 +30,4 @@ const App = () => {
     }
   };
 };
-'''
+```
