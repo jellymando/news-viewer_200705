@@ -1,22 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NewsItem from './NewsItem';
+import axios from 'axios';
 
-const sampleArticle = {
-    title: '제목',
-    description: '내용',
-    url: 'https://google.com',
-    urlToImage: 'https://via.placeholder.com/160'
-};
 
 const NewsList = () => {
+    const [articles, setArticles] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get(
+                    'https://newsapi.org/v2/top-headlines?country=kr&apiKey=54cfead6486041a2af9ec1cf6e98d343',
+                );
+                setArticles(response.data.articles);
+            } catch (e) {
+                console.log(e)
+            }
+            setLoading(false);
+        };
+        fetchData();
+    }, []);
+
+    if (loading) {
+        return <div className="newsListBlock">대기 중...</div>
+    }
+
+    if (!articles) {
+        return null;
+    }
+
+
     return (
         <div className="newsListBlock">
-            <NewsItem article={sampleArticle} />
-            <NewsItem article={sampleArticle} />
-            <NewsItem article={sampleArticle} />
-            <NewsItem article={sampleArticle} />
-            <NewsItem article={sampleArticle} />
-            <NewsItem article={sampleArticle} />
+            {articles.map(article => (
+                <NewsItem key={article.url} article={article} />
+            ))}
         </div>
     );
 };
