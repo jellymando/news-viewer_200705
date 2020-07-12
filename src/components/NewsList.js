@@ -35,7 +35,7 @@ const NewsList = () => {
     return (
         <div className="newsListBlock">
             {articles.map(article => (
-                <NewsItem key={article.url} article={article} />
+                <NewsItem article={article} />
             ))}
         </div>
     );
